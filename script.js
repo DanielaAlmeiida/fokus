@@ -4,25 +4,33 @@ const btnFoco = document.querySelector('.app__card-button--foco')
 const btnCurto = document.querySelector('.app__card-button--curto')
 const btnLongo = document.querySelector('.app__card-button--longo')
 
+const buttons = document.querySelectorAll('.app__card-button')
+
 const banner = document.querySelector('.app__image')
 
 const titulo = document.querySelector('.app__title')
 
 btnFoco.addEventListener('click', () => {
     alterarContexto('foco')
+    btnFoco.classList.add('active')
 })
 
 btnCurto.addEventListener('click', () => {
     alterarContexto('descanso-curto')
+    btnCurto.classList.add('active')
 })
 
 btnLongo.addEventListener('click', () => {
     alterarContexto('descanso-longo')
+    btnLongo.classList.add('active')
 })    
 
 function alterarContexto(contexto) {
     html.setAttribute('data-contexto', contexto)
     banner.setAttribute('src', `/imagens/${contexto}.png`)
+
+    buttons.forEach( btn => btn.classList.remove('active'))
+
 
     switch (contexto) {
         case 'foco':
@@ -49,4 +57,6 @@ function alterarContexto(contexto) {
         default:
             break;
     }
+
+    
 }
