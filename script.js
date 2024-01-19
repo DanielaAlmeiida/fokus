@@ -80,9 +80,14 @@ inputFocoMusica.addEventListener('change', () => {
 
 
 
+
 const audioInicia = new Audio('sons/play.wav')
 const audioPausa = new Audio('sons/pause.mp3')
 const audioTempoFinalizado = new Audio('sons/beep.mp3')
+
+const btnComecarOuPausar = document.querySelector('#start-pause span')
+
+const imagemBtn = document.querySelector('.app__card-primary-butto-icon')
 
 const contagemRegressiva = () => {
     if (tempoDecorridoEmSegundos <= 0) {
@@ -105,9 +110,14 @@ function iniciarOuPausar() {
     }
     audioInicia.play()
     intervaloId = setInterval(contagemRegressiva, 1000)
+    iniciarOuPausar.textContent = "Pausar"
+    imagemBtn.setAttribute('src', '/imagens/pause.png')
 }
 
 function zerar() {
     clearInterval(intervaloId)
     intervaloId = null
+    iniciarOuPausar.textContent = "Iniciar"
+    imagemBtn.setAttribute('src', '/imagens/play_arrow.png')
 }
+
