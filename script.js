@@ -9,25 +9,29 @@ const btnStartPause = document.querySelector('#start-pause')
 const banner = document.querySelector('.app__image')
 const titulo = document.querySelector('.app__title')
 
-let tempoDecorridoEmSegundos = 5
+let tempoDecorridoEmSegundos = 1500
 let intervaloId = null
 
 btnFoco.addEventListener('click', () => {
+    tempoDecorridoEmSegundos = 1500
     alterarContexto('foco')
     btnFoco.classList.add('active')
 })
 
 btnCurto.addEventListener('click', () => {
+    tempoDecorridoEmSegundos = 300
     alterarContexto('descanso-curto')
     btnCurto.classList.add('active')
 })
 
 btnLongo.addEventListener('click', () => {
+    tempoDecorridoEmSegundos = 900
     alterarContexto('descanso-longo')
     btnLongo.classList.add('active')
 })    
 
 function alterarContexto(contexto) {
+    mostrarTempo()
     html.setAttribute('data-contexto', contexto)
     banner.setAttribute('src', `/imagens/${contexto}.png`)
 
@@ -97,7 +101,7 @@ const contagemRegressiva = () => {
         return
     }
     tempoDecorridoEmSegundos -= 1
-    console.log('Tempo:' + tempoDecorridoEmSegundos)
+    mostrarTempo()
 }
 
 btnStartPause.addEventListener('click', iniciarOuPausar)
@@ -121,3 +125,18 @@ function zerar() {
     imagemBtn.setAttribute('src', '/imagens/play_arrow.png')
 }
 
+
+
+
+
+
+
+const tempoNaTela = document.querySelector('#timer')
+
+function mostrarTempo() {
+    const tempo = new Date(tempoDecorridoEmSegundos * 1000)
+    const tempoFormatado = tempo.toLocaleTimeString('pt-Br', {minute: '2-digit', second: '2-digit'})
+    tempoNaTela.innerHTML = `${tempoFormatado}`
+}
+
+mostrarTempo()
