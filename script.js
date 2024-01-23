@@ -5,12 +5,23 @@ const btnCurto = document.querySelector('.app__card-button--curto')
 const btnLongo = document.querySelector('.app__card-button--longo')
 const buttons = document.querySelectorAll('.app__card-button')
 const btnStartPause = document.querySelector('#start-pause')
+const btnComecarOuPausar = document.querySelector('#start-pause span')
 
+const imagemBtn = document.querySelector('.app__card-primary-butto-icon')
 const banner = document.querySelector('.app__image')
 const titulo = document.querySelector('.app__title')
+const tempoNaTela = document.querySelector('#timer')
+const audioInicia = new Audio('sons/play.wav')
+const audioPausa = new Audio('sons/pause.mp3')
+const audioTempoFinalizado = new Audio('sons/beep.mp3')
+const inputFocoMusica = document.querySelector('#alternar-musica')
+const musica = new Audio('/sons/luna-rise-part-one.mp3')
 
 let tempoDecorridoEmSegundos = 1500
 let intervaloId = null
+
+musica.loop = true
+
 
 btnFoco.addEventListener('click', () => {
     tempoDecorridoEmSegundos = 1500
@@ -37,7 +48,6 @@ function alterarContexto(contexto) {
 
     buttons.forEach( btn => btn.classList.remove('active'))
 
-
     switch (contexto) {
         case 'foco':
             titulo.innerHTML= `
@@ -63,16 +73,8 @@ function alterarContexto(contexto) {
         default:
             break;
     }
-
-    
 }
 
-
-
-
-const inputFocoMusica = document.querySelector('#alternar-musica')
-const musica = new Audio('/sons/luna-rise-part-one.mp3')
-musica.loop = true
 
 inputFocoMusica.addEventListener('change', () => {
     if (musica.paused) {
@@ -82,16 +84,6 @@ inputFocoMusica.addEventListener('change', () => {
     }
 })
 
-
-
-
-const audioInicia = new Audio('sons/play.wav')
-const audioPausa = new Audio('sons/pause.mp3')
-const audioTempoFinalizado = new Audio('sons/beep.mp3')
-
-const btnComecarOuPausar = document.querySelector('#start-pause span')
-
-const imagemBtn = document.querySelector('.app__card-primary-butto-icon')
 
 const contagemRegressiva = () => {
     if (tempoDecorridoEmSegundos <= 0) {
@@ -125,13 +117,6 @@ function zerar() {
     imagemBtn.setAttribute('src', '/imagens/play_arrow.png')
 }
 
-
-
-
-
-
-
-const tempoNaTela = document.querySelector('#timer')
 
 function mostrarTempo() {
     const tempo = new Date(tempoDecorridoEmSegundos * 1000)
