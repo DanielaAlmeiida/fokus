@@ -17,7 +17,7 @@ const audioTempoFinalizado = new Audio('sons/beep.mp3')
 const inputFocoMusica = document.querySelector('#alternar-musica')
 const musica = new Audio('/sons/luna-rise-part-one.mp3')
 
-let tempoDecorridoEmSegundos = 1500
+let tempoDecorridoEmSegundos = 1
 let intervaloId = null
 
 musica.loop = true
